@@ -20,7 +20,7 @@ def inputMessage():
 
 
 def inputKey():
-    print("Please enter your key: ")
+    print("Please enter your key: (defult is 3)")
     getIn = input()
     #key = int(input())
     if getIn == "":
@@ -31,14 +31,32 @@ def inputKey():
 
 
 def encrypt(mode, message, key):
+    #if mode == '2':
+    #    key = -key
+    #d = { }
+    #for c in (65, 97):
+    #    for i in range(26):
+    #        d[chr(i+c)] = chr((i+key) % 26 + c)
+    #print("Result:")
+    #print("".join([d.get(c, c) for c in message]))
+    password = ""
+    cipher = 0
     if mode == '2':
         key = -key
-    d = { }
-    for c in (65, 97):
-        for i in range(26):
-            d[chr(i+c)] = chr((i+key) % 26 + c)
+    for i in message:
+        if mode == '1':
+            if ord(i) + key > 126:
+                cipher = ord(i) + key - 95
+            else:
+                cipher = ord(i) + key
+        else:
+            if ord(i) + key < 32:
+                cipher = ord(i) + key + 95
+            else:
+                cipher = ord(i) + key
+        password += (chr(cipher))
     print("Result:")
-    print("".join([d.get(c, c) for c in message]))
+    print(password)
 
 
 mode = selectMode()
